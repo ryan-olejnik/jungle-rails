@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
     # value = cookies[:cart] || JSON.generate({})
     @cart ||= cookies[:cart].present? ? JSON.parse(cookies[:cart]) : {}
   end
-  helper_method :cart
+  helper_method :cart #this makes cart available in the views
 
   def update_cart(new_cart)
     cookies[:cart] = {

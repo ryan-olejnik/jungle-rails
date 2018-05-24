@@ -1,0 +1,24 @@
+<section class="admin-products-index">
+
+  <header class="page-header">
+    <h1>Admin &raquo; All Categories</h1>
+  </header>
+
+  <div class="well">
+    <%= link_to '+ New Category', [:new, :admin, :category], class: 'btn btn-info' %>
+  </div>
+
+  <div class="panel panel-default products">
+    <h2>Categories</h2>
+    <ul>
+      <% for category in @categories %>
+        <li><%= category.name %> <a href="/categories/<%=category[:id]%>">  View All Products</a></li>
+      <% end %>
+    </ul>
+
+
+
+
+  </div>
+
+</section>
