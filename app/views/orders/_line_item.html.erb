@@ -1,0 +1,9 @@
+<tr>
+  <td colspan="2"><%= product[:name] %><%= image_tag product.image.tiny %></td>
+  <td><%= "$#{product[:price_cents]/100.00}" %></td>
+  <td><%= item[:quantity] %></td>
+  <td><%= "$#{(item[:total_price_cents]/100.00)}" %></td>
+</tr>
+
+
+

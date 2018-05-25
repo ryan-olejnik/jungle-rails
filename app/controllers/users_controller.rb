@@ -8,9 +8,6 @@ class UsersController < ApplicationController
 
 
     if @user.save
-
-
-
       session[:user_id] = @user.id
       redirect_to :root
     else
@@ -18,8 +15,7 @@ class UsersController < ApplicationController
       if @user.errors.size > 0
         puts 'THERE WERE ERRORS!'
       end
-
-      
+    
       # byebug
       render :new
     end
