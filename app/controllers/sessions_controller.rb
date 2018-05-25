@@ -13,6 +13,7 @@ class SessionsController < ApplicationController
       # logged in when they navigate around our website.
       session[:user_id] = user.id
       puts "#{user[:first_name]} #{user[:last_name]} has LOGGED ON!!"
+      # byebug
       redirect_to '/'
     else
     # If user's login doesn't work, send them back to the login form.
@@ -21,7 +22,8 @@ class SessionsController < ApplicationController
   end
 
   def destroy #user logs out
-    session[:user_id] = user.id
+    session[:user_id] = nil
+    redirect_to '/'
   end
 
 end
