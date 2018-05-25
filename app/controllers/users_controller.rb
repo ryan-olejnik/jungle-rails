@@ -4,19 +4,32 @@ class UsersController < ApplicationController
   end
 
   def create
-    puts "params = #{params}"
-    puts "params[:user] = #{params[:user]}"
-    new_user = {
-      first_name: params[:user][:first_name],
-      last_name: params[:user][:last_name],
-      email: params[:user][:email],
-      password: params[:user][:password],
+    @user = User.new(user_params)
 
 
-    }
-    @user = User.create!(new_user)
-    redirect_to :root
+    if @user.save
+
+
+
+      session[:user_id] = @user.id
+      redirect_to :root
+    else
+      # byebug
+      if @user.errors.size > 0
+        puts 'THERE WERE ERRORS!'
+      end
+
+      
+      # byebug
+      render :new
+    end
+  end
+
+
+  private
+
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
   end
 
 end
-
