@@ -1,8 +1,12 @@
 class OrdersController < ApplicationController
 
   def show
-    @order = Order.find(params[:id])    
-    # byebug
+    @order = Order.find(params[:id])
+    byebug
+    #Send Email confirmation
+
+
+        
   end
 
   def create
@@ -38,7 +42,7 @@ class OrdersController < ApplicationController
 
   def create_order(stripe_charge)
     order = Order.new(
-      email: params[:stripeEmail],
+      email: 'ryan.c3p@gmail.com',       #params[:stripeEmail],
       total_cents: cart_total,
       stripe_charge_id: stripe_charge.id, # returned by stripe
     )
@@ -54,6 +58,8 @@ class OrdersController < ApplicationController
       end
     end
     order.save!
+    byebug
+    UserMailer.order_confirmation(order).deliver
     order
   end
 
