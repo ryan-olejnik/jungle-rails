@@ -1,1 +1,36 @@
-<h1>UserMailer#order_confirmation</h1>
+<section class="orders-show">
+
+  <div class="order-summary jumbotron">
+    <h4>Thank you for your order!</h4>
+  </div>
+
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th colspan="2">Product</th>
+        <th>Unit Price</th>
+        <th>Quantity</th>
+        <th>Total Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for line_item in @order.line_items %>
+        <% product = Product.find(line_item.product_id) %>
+        <%= render 'line_item', item: line_item, product: product%>
+      <% end %>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th colspan="4">
+          TOTAL:
+        </th>
+        <th>
+          <%="$#{@order.total_cents/100.00}"%>
+        </th>
+      </tr>
+    </tfoot>
+  </table>
+
+
+</section>

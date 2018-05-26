@@ -6,9 +6,9 @@ class UserMailer < ApplicationMailer
   #   en.user_mailer.order_confirmation.subject
   #
   def order_confirmation(order)
-    
+
+
     @order = order
-    @greeting = "Hi"
 
     mail to: @order.email, subject: 'Order Confirmation'
   end

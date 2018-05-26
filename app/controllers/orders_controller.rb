@@ -2,11 +2,7 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    byebug
-    #Send Email confirmation
-
-
-        
+    # byebug        
   end
 
   def create
@@ -58,7 +54,7 @@ class OrdersController < ApplicationController
       end
     end
     order.save!
-    byebug
+    #Send Order confirmation via email:
     UserMailer.order_confirmation(order).deliver
     order
   end
