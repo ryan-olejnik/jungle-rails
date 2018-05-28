@@ -15,7 +15,6 @@ class UsersController < ApplicationController
         puts 'THERE WERE ERRORS!'
       end
     
-      # byebug
       render :new
     end
   end
