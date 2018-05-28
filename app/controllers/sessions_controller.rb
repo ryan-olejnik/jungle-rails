@@ -27,6 +27,9 @@ class SessionsController < ApplicationController
   end
 
   def self.authenticate_with_credentials(email, password)
+    #remove leading/trailing spaces from email (there should not be internal spaces), and downcase:
+    email = email.tr(' ', '').downcase
+
     user = User.find_by_email(email)
     if user && user.authenticate(password)
       return user

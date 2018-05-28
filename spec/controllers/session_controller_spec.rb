@@ -22,6 +22,20 @@ RSpec.describe SessionsController, type: :controller do
     end
 
 
+    it 'should return user object (truthy) if email and password are correct, but email has leading/trailing spaces' do
+      @user = User.new(first_name: 'Jane', last_name: 'Doe', email: 'jane.doe@gmail.com', password: 'password', password_confirmation: 'password')
+      @user.save
+      expect(SessionsController.authenticate_with_credentials('  jane.doe@gmail.com  ', 'password')).to be_truthy
+    end
+
+    #--------------------------------------------------------------------------
+
+    it 'should return user object (truthy) if email and password are correct, but email has incorrect cAsInG' do
+      @user = User.new(first_name: 'Jane', last_name: 'Doe', email: 'jane.doe@gmail.com', password: 'password', password_confirmation: 'password')
+      @user.save
+      expect(SessionsController.authenticate_with_credentials('jAne.DoE@gmail.com', 'password')).to be_truthy
+    end
+
   end
 
 end
