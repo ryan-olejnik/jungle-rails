@@ -6,14 +6,18 @@ class OrdersController < ApplicationController
   end
 
   def create
-    charge = perform_stripe_charge
-    order  = create_order(charge)
+    if cart.size > 0
+      charge = perform_stripe_charge
+      order  = create_order(charge)
 
-    if order.valid?
-      empty_cart!
-      redirect_to order, notice: 'Your Order has been placed.'
+      if order.valid?
+        empty_cart!
+        redirect_to order, notice: 'Your Order has been placed.'
+      else
+        redirect_to cart_path, flash: { error: order.errors.full_messages.first }
+      end
     else
-      redirect_to cart_path, flash: { error: order.errors.full_messages.first }
+      redirect_to cart_path, flash: {error: 'Cart is empty: Payment was not processed'}
     end
 
   rescue Stripe::CardError => e

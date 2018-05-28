@@ -4,6 +4,12 @@
     <h1>My Cart</h1>
   </header>
 
+  <div class="container">
+    <% flash.each do |key, value| %>
+      <div class="alert alert-danger"><%= value %></div>
+    <% end %>
+  </div>
+
   <div class="panel panel-default items">
     <table class="table table-bordered">
       <thead>
@@ -35,17 +41,19 @@
 
   <div class="row">
     <div class="col-xs-12">
-      <%= form_tag orders_path do %>
-        <script
-          src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-          data-amount="<%= @cart_total * 100 %>"
-          data-name="Jungle"
-          data-description="Khurram Virani's Jungle Order"
-          data-locale="auto"
-          data-email="kvirani@gmail.com"
-          data-currency="cad">
-        </script>
+      <% if cart.size > 0 %>
+        <%= form_tag orders_path do %>
+          <script
+            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+            data-amount="<%= @cart_total * 100 %>"
+            data-name="Jungle"
+            data-description="Khurram Virani's Jungle Order"
+            data-locale="auto"
+            data-email="kvirani@gmail.com"
+            data-currency="cad">
+          </script>
+        <% end %>
       <% end %>
     </div>
   </div>
