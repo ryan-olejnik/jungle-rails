@@ -21,11 +21,5 @@ RSpec.describe User, type: :model do
       expect(@user.save).to be_falsy
       expect(User.all.size).to eql(0)      
     end
-
-
-
-
-
-
   end
 end

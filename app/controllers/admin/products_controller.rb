@@ -1,4 +1,5 @@
 class Admin::ProductsController < ApplicationController
+  include HttpAuthConcern
   before_action :authenticate
   def index
     @products = Product.order(id: :desc).all
