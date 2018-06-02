@@ -22,6 +22,7 @@ RSpec.feature "ProductDetails", type: :feature,  js: true do
     expect(find('#description')).to have_content('Super fast remote controlled car.')
     expect(find('#quantity')).to have_content(10)
     expect(find('#price')).to have_content(139.99)
+    save_screenshot
 
   end
 
